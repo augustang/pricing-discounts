@@ -78,23 +78,28 @@ export function PrototypeToolbar({
         </label>
       </div>
 
-      <div className={styles.group}>
-        <p className={styles.groupLabel}>UI elements</p>
-        <div className={styles.row}>
-          <label className={styles.checkLabel}>
-            <input
-              type="checkbox"
-              checked={badgeWithStrike}
-              onChange={(e) => onBadgeWithStrikeChange(e.target.checked)}
-            />
-            <span>Strike</span>
-          </label>
+      <fieldset className={styles.group} aria-labelledby="proto-toolbar-cta">
+        <p className={styles.groupLabel} id="proto-toolbar-cta">
+          CTA style
+        </p>
+        <div className={styles.heroRadios}>
+          {([1, 2, 3, 4] as const).map((n) => (
+            <label key={n} className={styles.radioLabel}>
+              <input
+                type="radio"
+                name="prototype-cta"
+                checked={ctaVariant === n}
+                onChange={() => onCtaVariantChange(n)}
+              />
+              <span>{String(n).padStart(2, "0")}</span>
+            </label>
+          ))}
         </div>
-      </div>
+      </fieldset>
 
       <fieldset className={styles.group} aria-labelledby="proto-toolbar-promo">
         <p className={styles.groupLabel} id="proto-toolbar-promo">
-          Promo
+          Promo text
         </p>
         <div className={styles.heroRadios}>
           {([1, 2, 3, 4] as const).map((n) => (
@@ -111,24 +116,19 @@ export function PrototypeToolbar({
         </div>
       </fieldset>
 
-      <fieldset className={styles.group} aria-labelledby="proto-toolbar-cta">
-        <p className={styles.groupLabel} id="proto-toolbar-cta">
-          CTA
-        </p>
-        <div className={styles.heroRadios}>
-          {([1, 2, 3, 4] as const).map((n) => (
-            <label key={n} className={styles.radioLabel}>
-              <input
-                type="radio"
-                name="prototype-cta"
-                checked={ctaVariant === n}
-                onChange={() => onCtaVariantChange(n)}
-              />
-              <span>{String(n).padStart(2, "0")}</span>
-            </label>
-          ))}
+      <div className={styles.group}>
+        <p className={styles.groupLabel}>UI elements</p>
+        <div className={styles.row}>
+          <label className={styles.checkLabel}>
+            <input
+              type="checkbox"
+              checked={badgeWithStrike}
+              onChange={(e) => onBadgeWithStrikeChange(e.target.checked)}
+            />
+            <span>Strike</span>
+          </label>
         </div>
-      </fieldset>
+      </div>
     </motion.aside>
   );
 }
