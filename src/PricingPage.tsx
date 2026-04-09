@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { assets } from "./assets/paths";
 import { AdvancedPricingCard, PricingPlanCard } from "./PricingCard";
 import {
@@ -26,10 +26,6 @@ const HERO_TITLE = "Beautiful websites";
 const HERO_SUB = "Free for 14 days.";
 const HERO_SUB_ACCENT = "Pay annually to save up to 36%.";
 
-function readPrototypeQuery(): boolean {
-  if (typeof window === "undefined") return false;
-  return new URLSearchParams(window.location.search).get("prototype") === "1";
-}
 
 const comparisonRows: { feature: string; cells: string[] }[] = [
   { feature: "Contributors", cells: ["2", "Unlimited", "Unlimited", "Unlimited"] },
