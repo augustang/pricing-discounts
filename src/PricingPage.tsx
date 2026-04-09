@@ -140,10 +140,7 @@ export function PricingPage() {
   const [billing, setBilling] = useState<Billing>("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [localPromoVisible, setLocalPromoVisible] = useState(true);
-  const showToolbar = useMemo(
-    () => import.meta.env.DEV || readPrototypeQuery(),
-    [],
-  );
+  const showToolbar = true;
   const [toolbarProto, setToolbarProto] = useState({
     activePromo: false,
     badgeWithStrike: false,
