@@ -20,6 +20,7 @@ const PROMO_BADGE_LABELS: Record<PromoVariant, string> = {
   2: "Take 20% off at checkout",
   3: "20% off at checkout",
   4: "Limited time 20% off",
+  5: "20% off",
 };
 
 const HERO_TITLE = "Beautiful websites";
@@ -139,7 +140,6 @@ export function PricingPage() {
   const showToolbar = true;
   const [toolbarProto, setToolbarProto] = useState({
     activePromo: true,
-    badgeWithStrike: false,
     ctaVariant: 4 as CtaVariant,
     promoVariant: 4 as PromoVariant,
   });
@@ -147,15 +147,14 @@ export function PricingPage() {
   const proto = showToolbar
     ? toolbarProto
     : {
-        badgeWithStrike: false,
         ctaVariant: 2 as CtaVariant,
         promoVariant: 2 as PromoVariant,
       };
 
   const promoVisible = showToolbar ? toolbarProto.activePromo : localPromoVisible;
   const showDiscount = showToolbar ? toolbarProto.activePromo : false;
-  /** Badge+Strike: badge shows label + struck original price; main number = discounted */
-  const badgeWithStrike = showDiscount && proto.badgeWithStrike;
+  /** CTA 01/02 → badge+strike on; CTA 03/04 → badge+strike off */
+  const badgeWithStrike = showDiscount && (proto.ctaVariant === 1 || proto.ctaVariant === 2);
 
   const discountAppliesToListedPrice = false;
 
@@ -758,8 +757,6 @@ export function PricingPage() {
         <PrototypeToolbar
           activePromo={toolbarProto.activePromo}
           onActivePromoChange={(v) => setToolbarProto((s) => ({ ...s, activePromo: v }))}
-          badgeWithStrike={toolbarProto.badgeWithStrike}
-          onBadgeWithStrikeChange={(v) => setToolbarProto((s) => ({ ...s, badgeWithStrike: v }))}
           ctaVariant={toolbarProto.ctaVariant}
           onCtaVariantChange={(v) => setToolbarProto((s) => ({ ...s, ctaVariant: v }))}
           promoVariant={toolbarProto.promoVariant}

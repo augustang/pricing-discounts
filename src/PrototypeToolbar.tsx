@@ -2,16 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./PrototypeToolbar.module.css";
 
-export type PromoVariant = 1 | 2 | 3 | 4;
+export type PromoVariant = 1 | 2 | 3 | 4 | 5;
 export type CtaVariant = 1 | 2 | 3 | 4;
 
 export type PrototypeToolbarProps = {
   /** Top promo banner + 20% promotional pricing display */
   activePromo: boolean;
   onActivePromoChange: (v: boolean) => void;
-  /** Combined badge + inline struck original price; main number shows discounted */
-  badgeWithStrike: boolean;
-  onBadgeWithStrikeChange: (v: boolean) => void;
   ctaVariant: CtaVariant;
   onCtaVariantChange: (v: CtaVariant) => void;
   promoVariant: PromoVariant;
@@ -23,8 +20,6 @@ const TRIGGER_ZONE_PX = 48;
 export function PrototypeToolbar({
   activePromo,
   onActivePromoChange,
-  badgeWithStrike,
-  onBadgeWithStrikeChange,
   ctaVariant,
   onCtaVariantChange,
   promoVariant,
@@ -104,7 +99,7 @@ export function PrototypeToolbar({
           Promo text
         </p>
         <div className={styles.heroRadios}>
-          {([1, 2, 3, 4] as const).map((n) => (
+          {([1, 2, 3, 4, 5] as const).map((n) => (
             <label key={n} className={styles.radioLabel}>
               <input
                 type="radio"
@@ -118,19 +113,6 @@ export function PrototypeToolbar({
         </div>
       </fieldset>
 
-      <fieldset className={`${styles.group} ${!activePromo ? styles.groupDisabled : ""}`} disabled={!activePromo}>
-        <p className={styles.groupLabel}>UI elements</p>
-        <div className={styles.row}>
-          <label className={styles.checkLabel}>
-            <input
-              type="checkbox"
-              checked={badgeWithStrike}
-              onChange={(e) => onBadgeWithStrikeChange(e.target.checked)}
-            />
-            <span>Strike</span>
-          </label>
-        </div>
-      </fieldset>
     </motion.aside>
   );
 }
