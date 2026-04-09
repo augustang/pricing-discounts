@@ -1,0 +1,52 @@
+/**
+ * Clarkson Sans — files live in `public/assets/fonts/Clarkson-Sans/`.
+ */
+@font-face {
+  font-family: Clarkson;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Light.woff2") format("woff2"),
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: Clarkson;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Clarkson-Sans/Clarkson-BookProduct.woff2") format("woff2"),
+    url("/assets/fonts/Clarkson-Sans/Clarkson-BookProduct.woff") format("woff");
+}
+
+@font-face {
+  font-family: Clarkson;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Medium.woff2") format("woff2"),
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: Clarkson;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Semibold.woff2") format("woff2"),
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Semibold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Clarkson;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Bold.woff2") format("woff2"),
+    url("/assets/fonts/Clarkson-Sans/Clarkson-Bold.woff") format("woff");
+}

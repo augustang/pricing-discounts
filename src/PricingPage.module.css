@@ -1,0 +1,1830 @@
+.page {
+  /* Local shadows (Figma card elevation — not in core token list) */
+  --shadow-card:
+    0 -1px 30px rgba(0, 0, 0, 0.03),
+    0 9px 20px rgba(0, 0, 0, 0.03),
+    0 36px 36px rgba(0, 0, 0, 0.03),
+    0 81px 49px rgba(0, 0, 0, 0.02),
+    0 144px 58px rgba(0, 0, 0, 0),
+    0 225px 63px rgba(0, 0, 0, 0);
+  --shadow-card-rec:
+    0 -1px 30px rgba(0, 0, 0, 0.1),
+    0 9px 19px rgba(0, 0, 0, 0.1),
+    0 35px 35px rgba(0, 0, 0, 0.09),
+    0 78px 47px rgba(0, 0, 0, 0.05),
+    0 139px 56px rgba(0, 0, 0, 0.01),
+    0 218px 61px rgba(0, 0, 0, 0);
+  --fs-border-cta: rgba(0, 0, 0, 0.2);
+  --fs-border-white-20: rgba(255, 255, 255, 0.2);
+
+  font-family: var(--font-family-clarkson);
+  color: var(--color-black);
+  background: var(--color-white);
+  min-height: 100vh;
+}
+
+/* Max-width artboard + toolkit horizontal padding (matches .fsContainer) */
+.inner {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--space-16);
+  box-sizing: border-box;
+}
+
+@media (min-width: 744px) {
+  .inner {
+    padding-inline: var(--space-24);
+  }
+}
+
+@media (min-width: 1280px) {
+  .inner {
+    padding-inline: var(--space-40);
+  }
+}
+
+/* Full-bleed black behind centered .inner sections (showcase → conversion) */
+.lowerDarkBand {
+  width: 100%;
+  background: var(--color-black);
+}
+
+/* Promo */
+.promoWrap {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.promoWrapVisible {
+  max-height: 60px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promoWrap {
+    transition-duration: 0.01ms;
+  }
+}
+
+.promo {
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: var(--space-4) var(--space-40);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.promoCenter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+}
+
+.promoSentence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.promoLink {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  color: inherit;
+}
+
+.promoCode {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: var(--space-4) var(--space-8);
+}
+
+/* --- Icon slots: 22×22 (assets are 22×22 SVGs) --- */
+.iconSlot16 {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconSlot16 img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Figma wraps feature/strip icons with ~2px visual padding inside the 22px slot */
+.iconSlot16Comfort {
+  padding: 2px;
+}
+
+.iconSlot16Comfort img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Strip + card feature icons render gray (#898989) to match Figma */
+.stripItem .iconSlot16 img,
+.featureList .iconSlot16 img {
+  filter: brightness(0) saturate(100%) invert(59%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(88%);
+}
+
+/* Nav chevron: 22×22 slot, Chevron Small Down */
+.navChevronSlot {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+.navChevronSlot img {
+  width: 22px;
+  height: 22px;
+}
+
+.promoClose {
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+.promoClose::before,
+.promoClose::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: var(--color-white);
+}
+
+.promoClose::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.promoClose::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Nav — avoid padding shorthand so .inner padding-inline (16/24/40px, matches SQSP --grid-gutter-width) wins */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--space-80);
+  padding-block: 0;
+  background: var(--color-white);
+  border-bottom: 1px solid transparent;
+}
+
+.navBrand {
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.navLogoLockup {
+  display: none;
+  height: 30px;
+  width: auto;
+  max-width: min(208px, 55vw);
+  object-fit: contain;
+  object-position: left center;
+}
+
+.navLogoMark {
+  display: block;
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (min-width: 744px) {
+  .navLogoLockup {
+    display: block;
+  }
+  .navLogoMark {
+    display: none;
+  }
+}
+
+.navPrimary {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-32);
+  align-items: center;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  background: #1e4c41;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ctaInner {
+  /* standalone class so CSS Modules exports it; scoped rules under each button */
+}
+
+/* Float fill invert flat — bg + color transition, no pseudos */
+.btnPrimary {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1em;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: var(--space-24) var(--space-32);
+  border: none;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  transition:
+    color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+    background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@media (hover: hover) {
+  .btnPrimary:hover {
+    color: var(--color-black);
+    background-color: #e5e5e5;
+  }
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnPrimary {
+    transition: none;
+  }
+}
+
+/* Primary fade — opacity-only hover (nav CTA) */
+.btnPrimaryFade {
+  composes: btnPrimary;
+  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@media (hover: hover) {
+  .btnPrimaryFade:hover {
+    opacity: 0.8;
+    color: var(--color-white);
+    background-color: var(--color-black);
+  }
+}
+
+.btnPrimaryFade:focus-visible {
+  opacity: 1;
+}
+
+.btnPrimaryFade:active {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnPrimaryFade {
+    transition: none;
+  }
+}
+
+/* Buy now + “20% off” inline (hover-to-discount CTA): row centered in button; hint expands so pair stays centered */
+.btnPrimaryHasHoverHint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnPrimaryHoverRow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.btnPrimaryMain {
+  flex-shrink: 0;
+}
+
+.btnPrimaryDiscountHint {
+  flex-shrink: 0;
+  box-sizing: content-box;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    opacity 300ms ease-in-out,
+    max-width 300ms ease-in-out,
+    margin-left 300ms ease-in-out,
+    color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@media (hover: hover) {
+  .btnPrimaryHasHoverHint:hover .btnPrimaryDiscountHint {
+    opacity: 1;
+    max-width: 6.5rem;
+    margin-left: var(--space-8);
+    color: rgba(0, 0, 0, 0.55);
+  }
+}
+
+.btnPrimaryDiscountHintInstant {
+  transition-duration: 0.01ms;
+}
+
+/* Float fill outline — transparent + inset ring, fills on hover */
+.btnOutline {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1em;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: var(--space-24) var(--space-32);
+  color: var(--color-black);
+  background-color: transparent;
+  border: none;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-black) 20%, transparent);
+  transition:
+    color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+    background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+    box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@media (hover: hover) {
+  .btnOutline:hover {
+    color: var(--color-white);
+    background-color: #333;
+    box-shadow: inset 0 0 0 2px #333;
+  }
+}
+
+.btnOutline:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnOutline {
+    transition: none;
+  }
+}
+
+/* Float fill outline — dark variant (on dark backgrounds) */
+.btnOutlineLight {
+  composes: btnOutline;
+  color: var(--color-white);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-white) 20%, transparent);
+}
+
+@media (hover: hover) {
+  .btnOutlineLight:hover {
+    color: var(--color-black);
+    background-color: var(--color-white);
+    box-shadow: inset 0 0 0 2px var(--color-white);
+  }
+}
+
+.btnOutlineLight:focus-visible {
+  outline-color: var(--color-white);
+}
+
+/* Float fill invert flat — dark-section variant (white fill on dark bg) */
+.btnWhite {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1em;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: var(--space-24) var(--space-32);
+  border: none;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  transition:
+    color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+    background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@media (hover: hover) {
+  .btnWhite:hover {
+    color: var(--color-white);
+    background-color: #1a1a1a;
+  }
+}
+
+.btnWhite:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnWhite {
+    transition: none;
+  }
+}
+
+/* Hero — spacing aligned with .pricing-de-hero on de.squarespace.com/preise-de */
+.hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  padding-block: 40px;
+}
+
+@media (min-width: 744px) {
+  .hero {
+    gap: 40px;
+    padding-block: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero {
+    gap: 24px;
+    padding-block: 56px 64px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero {
+    padding-block: 80px;
+  }
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-24);
+  max-width: 100%;
+}
+
+.heroTitle {
+  margin: 0;
+  max-width: 894px;
+}
+
+.heroSub {
+  margin: 0;
+  max-width: 660px;
+  text-align: center;
+}
+
+.heroSubAccent {
+  color: var(--color-blue);
+  display: inline-flex;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  margin-left: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.0, 0.0, 0.2, 1) 0s,
+    max-width 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+    margin-left 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.heroSubAccentVisible {
+  opacity: 1;
+  max-width: 25em;
+  margin-left: 0.3em;
+  transition:
+    max-width 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+    margin-left 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.7s cubic-bezier(0.0, 0.0, 0.2, 1) 0.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroSubAccent {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Billing toggle — layout + hero entrance match squarespace.com/pricing (pricing-default-billing-toggle) */
+.billingToggle {
+  display: inline-flex;
+  gap: 0;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 1000px;
+  align-items: stretch;
+  position: relative;
+}
+
+@keyframes billingToggleHeroIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes billingToggleHeroInFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* .pricing-default-hero__billing-toggle--animated */
+.billingToggleAnimated {
+  opacity: 0;
+  animation: billingToggleHeroIn 1.3s cubic-bezier(0.23, 1, 0.32, 1) 0.4s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .billingToggleAnimated {
+    animation: billingToggleHeroInFade 1.3s cubic-bezier(0.23, 1, 0.32, 1) 0.4s forwards;
+    transform: none;
+  }
+}
+
+.billingToggleButton {
+  border: none;
+  border-radius: 1000px;
+  padding: var(--space-16) 20px;
+  font-size: 15px;
+  line-height: 1.4em;
+  letter-spacing: -0.001em;
+  font-family: inherit;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-gray-03);
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.billingToggleButton[aria-checked="true"] {
+  color: var(--color-black);
+}
+
+.billingToggleLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.togglePillBackground {
+  position: absolute;
+  top: var(--space-4);
+  bottom: var(--space-4);
+  left: var(--space-4);
+  width: calc(50% - var(--space-4));
+  z-index: 0;
+  border-radius: 1000px;
+  background: var(--color-white);
+  box-shadow:
+    0 16px 4px rgba(0, 0, 0, 0),
+    0 10px 4px rgba(0, 0, 0, 0.03),
+    0 6px 3px rgba(0, 0, 0, 0.05),
+    0 2px 2px rgba(0, 0, 0, 0.09),
+    0 1px 1px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.togglePillRight {
+  transform: translateX(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .togglePillBackground {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* All plans strip — .features-strip rhythm from live pricing */
+.strip {
+  padding-bottom: 32px;
+}
+
+@media (min-width: 744px) {
+  .strip {
+    padding-bottom: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .strip {
+    padding-bottom: 48px;
+  }
+}
+
+.stripInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0;
+}
+
+@media (min-width: 744px) {
+  .stripInner {
+    gap: var(--space-24) var(--space-32);
+  }
+}
+
+.stripLabel {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.stripItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+/* Pricing cards grid */
+.cardsSection {
+  padding-bottom: var(--space-80);
+  isolation: isolate;
+}
+
+.cardsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gutter-width);
+  margin-bottom: var(--space-16);
+  position: relative;
+  z-index: 0;
+}
+
+/* Fixed 16px gutters between plan cards (global token is 24px/40px at wider breakpoints) */
+@media (min-width: 1080px) {
+  .cardsRow {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .cardsRow {
+    margin-bottom: 48px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cardsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .navPrimary {
+    display: none;
+  }
+}
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--space-24);
+  padding: var(--space-32) var(--space-32) var(--space-40);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  min-height: 0;
+}
+
+/* Plan cards in row: main block grows; “See and compare…” stays bottom-aligned across columns */
+.cardsRow > .card {
+  height: 100%;
+  position: relative;
+  z-index: 0;
+}
+
+.cardMain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.cardsRow > .card > .compareLink {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0;
+}
+
+.cardRecommended {
+  box-shadow: var(--shadow-card-rec);
+}
+
+/* Title → price block → summary — matches .pricing-card__info / __price on preise-de */
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.cardPriceStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* Promo discount label — Figma Pricing Working Label (10667:417327): footnote on subtlest-shade pill */
+.discountPill {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-12);
+  border-radius: 30px;
+  background: var(--color-subtlest-shade);
+  color: var(--color-black);
+  width: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+/* Badge+Strike variant: struck original price inside the discount pill */
+.badgeStrikePrice {
+  color: var(--color-gray-02);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  margin-right: 6px;
+}
+
+/* Fade crossfade when billing toggle changes (price + blue savings line) */
+.billingPriceCrossfade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.stickyPriceMotion {
+  display: inline;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  min-height: 40px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.badge {
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-size: 12px;
+  line-height: 1.4em;
+  padding: var(--space-8) var(--space-16);
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.priceStrike {
+  font-size: 40px;
+  color: var(--color-gray-02);
+  letter-spacing: -0.04em;
+  position: relative;
+  line-height: 1.08;
+}
+
+.priceStrikeLine {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 50%;
+  height: 3px;
+  background: var(--color-gray-02);
+  transform: translateY(-50%);
+}
+
+/* Promotional original price — CSS line-through (no custom bar) */
+.priceStrikeText {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.15em;
+}
+
+.priceMain {
+  font-size: 40px;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+/* Hover-to-discount: ticker counts down/up; hidden measure locks width to wider of base/discounted */
+.hoverPriceTickerSlot {
+  display: inline-grid;
+  vertical-align: baseline;
+  min-height: calc(1.08 * 1em);
+  align-items: baseline;
+}
+
+.hoverPriceTickerMeasure {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+  height: 0;
+  overflow: hidden;
+}
+
+.hoverPriceTickerValue {
+  grid-area: 1 / 1;
+}
+
+/* Hover-to-slash: line + gray happen with /mo sliding right; discounted price fades in at the end */
+.hoverSlashSlot {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.hoverSlashBase {
+  position: relative;
+  display: inline-block;
+  transition: color 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.hoverSlashBaseStruck {
+  color: var(--color-gray-02);
+}
+
+.hoverSlashLine {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 50%;
+  height: 2.5px;
+  background: var(--color-gray-02);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.hoverSlashBaseStruck .hoverSlashLine {
+  transform: scaleX(1);
+}
+
+/* Space opens in sync with the slash (pushes /mo right); text fades in near the end */
+.hoverSlashDiscount {
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    max-width 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    margin-left 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.5s cubic-bezier(0.0, 0.0, 0.2, 1) 0.28s;
+}
+
+.hoverSlashDiscountVisible {
+  max-width: 5em;
+  margin-left: 8px;
+  opacity: 1;
+}
+
+/* CTA 05 variant: on hover-off, opacity drops first then space collapses */
+.hoverSlashDiscountFadeOff {
+  transition:
+    opacity 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    max-width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) 0.35s,
+    margin-left 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) 0.35s;
+}
+
+.hoverSlashDiscountFadeOff.hoverSlashDiscountVisible {
+  transition:
+    max-width 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    margin-left 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.5s cubic-bezier(0.0, 0.0, 0.2, 1) 0.28s;
+}
+
+.hoverSlashInstant .hoverSlashBase,
+.hoverSlashInstant .hoverSlashLine,
+.hoverSlashInstant .hoverSlashDiscount {
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+}
+
+.priceSuffix {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.savings {
+  color: var(--color-blue);
+  font-size: 15px;
+  line-height: 1.4em;
+  letter-spacing: -0.001em;
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 320px;
+}
+
+.cardCtas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.cardCtas .btnPrimary,
+.cardCtas .btnOutline {
+  width: 100%;
+}
+
+.sectionLabel {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4em;
+  letter-spacing: -0.001em;
+  margin: 0 0 var(--space-16);
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featureList li {
+  display: flex;
+  gap: var(--space-12);
+  align-items: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.compareLink {
+  font-size: 15px;
+  font-weight: 300;
+  text-decoration: underline;
+  text-decoration-color: var(--color-gray-01);
+  text-underline-offset: 0.5em;
+  text-decoration-thickness: 1px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  text-align: left;
+}
+
+/* Advanced row — grid cells stretch; lead column fills height; price stack uses margin-top: auto */
+.advancedCard {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 309px) 1fr;
+  gap: var(--space-32);
+  align-items: stretch;
+  padding: calc(var(--space-32) + var(--space-4)) var(--space-32);
+}
+
+.advancedCard > .cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.advancedCard > .cardInfo .cardPriceStack {
+  margin-top: auto;
+}
+
+.advancedMid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.advancedMid .sectionLabel {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.advancedMid .featureList {
+  margin-top: auto;
+}
+
+@media (min-width: 1280px) {
+  .advancedCard {
+    gap: var(--space-48);
+  }
+}
+
+@media (max-width: 900px) {
+  .advancedCard {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .advancedCard > .cardInfo {
+    height: auto;
+    gap: var(--space-16);
+  }
+
+  .advancedCard > .cardInfo .cardPriceStack {
+    margin-top: 0;
+  }
+
+  .advancedMid {
+    height: auto;
+    align-self: stretch;
+  }
+
+  .advancedMid .sectionLabel {
+    margin-bottom: var(--space-16);
+  }
+
+  .advancedMid .featureList {
+    margin-top: 0;
+  }
+
+  .advancedCol {
+    height: auto;
+    justify-content: flex-start;
+    align-self: stretch;
+  }
+}
+
+/* Blurb + 32px + CTAs define this column’s height; align to bottom of the stretched row */
+.advancedCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--space-32);
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  align-self: end;
+}
+
+.advancedActions {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.advancedActions .btnPrimary,
+.advancedActions .btnOutline {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+}
+
+/* Comparison — transparent so Advanced card shadow isn’t painted over by an opaque bar */
+.compareSection {
+  padding-bottom: var(--space-80);
+  background: transparent;
+}
+
+@media (min-width: 1280px) {
+  .compareSection {
+    padding-bottom: 120px;
+  }
+}
+
+/* Spans first 2 of 6 columns — aligned with .tableFeature below */
+.compareTitle {
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  align-self: start;
+  grid-column: 1 / span 2;
+}
+
+.compareSticky {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--grid-gutter-width);
+  align-items: start;
+  margin-bottom: var(--space-40);
+  padding-block: var(--space-16);
+}
+
+@media (max-width: 900px) {
+  .compareSticky {
+    grid-template-columns: 1fr;
+  }
+
+  .compareTitle {
+    grid-column: auto;
+    max-width: none;
+  }
+}
+
+.stickyCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: var(--space-12);
+}
+
+.stickyPlan {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.stickyPlanRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Core “recommended” dot — smaller than 16px slot */
+.stickyDot {
+  width: 4px;
+  height: 4px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.stickyPrice {
+  font-size: 15px;
+  margin: -8px 0 0;
+}
+
+.stickySavings {
+  margin: var(--space-12) 0 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--color-blue);
+}
+
+.strikeSm {
+  text-decoration: line-through;
+  color: var(--color-gray-02);
+}
+
+/* No border-top here — first .tableRow already has one; avoids double rule above Contributors */
+.table {
+  border-top: none;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--grid-gutter-width);
+  align-items: center;
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--color-gray-01);
+  font-size: 15px;
+  line-height: 1.4em;
+  letter-spacing: -0.001em;
+}
+
+@media (max-width: 900px) {
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+}
+
+.tableFeature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  grid-column: 1 / span 2;
+}
+
+@media (max-width: 900px) {
+  .tableFeature {
+    grid-column: auto;
+  }
+}
+
+.tableCell {
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.4em;
+}
+
+.showAllRow {
+  text-align: center;
+  padding: var(--space-40) 0 0;
+}
+
+/* btnGhost — alias for secondary swipe (light) */
+.btnGhost {
+  composes: btnOutline;
+}
+
+/* Sales */
+.sales {
+  position: relative;
+  min-height: 633px;
+  background: #1a2e2c;
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.salesBg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  opacity: 0.9;
+}
+
+.salesContent {
+  position: relative;
+  z-index: var(--z-base);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-40);
+  padding-top: calc(var(--space-64) + var(--space-4));
+  padding-bottom: var(--space-128);
+}
+
+@media (max-width: 900px) {
+  .salesContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+.salesBullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.salesBullets li {
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.salesBullets .iconSlot16 {
+  margin-top: 2px;
+}
+
+.salesHeadline {
+  margin: 0 0 var(--space-40);
+  max-width: 488px;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-24) var(--space-40);
+  padding-bottom: calc(var(--space-48) + var(--space-8));
+  position: relative;
+  z-index: var(--z-base);
+  opacity: 0.7;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Showcase intro + grid */
+.showcaseIntro {
+  color: var(--color-white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-40);
+  padding-top: var(--space-128);
+  padding-bottom: var(--space-80);
+}
+
+@media (max-width: 900px) {
+  .showcaseIntro {
+    grid-template-columns: 1fr;
+  }
+}
+
+.showcaseIntro h2 {
+  margin: 0;
+  max-width: 543px;
+}
+
+.showcaseIntro p {
+  margin: 0 0 var(--space-40);
+  max-width: 543px;
+}
+
+.gridSection {
+  padding-bottom: var(--space-80);
+}
+
+.gridRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.gridRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 25px;
+}
+
+.gridTiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gutter-width);
+}
+
+@media (max-width: 900px) {
+  .gridTiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tile {
+  aspect-ratio: 427 / 260;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #2a2a2a, #111);
+  position: relative;
+  overflow: hidden;
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 50%);
+}
+
+.tileLabel {
+  position: absolute;
+  bottom: var(--space-12);
+  left: var(--space-12);
+  z-index: var(--z-base);
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* FAQ */
+.faq {
+  color: var(--color-white);
+  padding-bottom: var(--space-128);
+  display: grid;
+  grid-template-columns: minmax(280px, 660px) 1fr;
+  gap: var(--grid-gutter-width);
+}
+
+@media (max-width: 1100px) {
+  .faq {
+    grid-template-columns: 1fr;
+  }
+}
+
+.faqTitle {
+  margin: 0;
+}
+
+.faqList {
+  max-width: 660px;
+}
+
+.faqItem {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.faqButton {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: 25px 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.faqIcon {
+  flex-shrink: 0;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.faqAnswer {
+  padding: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-gray-02);
+  max-width: 542px;
+}
+
+/* Support */
+.support {
+  color: var(--color-white);
+  padding-bottom: var(--space-128);
+}
+
+.support h2 {
+  margin: 0 0 var(--space-80);
+}
+
+.supportCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gutter-width);
+}
+
+@media (max-width: 700px) {
+  .supportCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.supportCard {
+  border: 1px solid var(--color-gray-03);
+  border-radius: var(--space-8);
+  padding: calc(var(--space-32) - var(--space-2));
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-128);
+}
+
+.supportCard h3 {
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.supportCard p {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 280px;
+  opacity: 0.9;
+}
+
+.supportArrow {
+  font-size: 26px;
+  text-align: right;
+}
+
+/* Conversion */
+.conversion {
+  color: var(--color-white);
+  padding-bottom: var(--space-128);
+}
+
+/* Heading uses global .fsText--title1 */
+.conversion h2 {
+  margin: 0 0 var(--space-40);
+  max-width: 893px;
+}
+
+.conversionRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-40);
+  margin-bottom: var(--space-80);
+}
+
+.conversionNote {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.conversionNote p {
+  margin: 0;
+}
+
+.hr {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: var(--space-40) 0;
+}
+
+.footerTop {
+  display: flex;
+  gap: var(--space-40);
+  flex-wrap: wrap;
+  margin: 0 0 var(--space-40);
+}
+
+.footerBrand {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-48);
+  min-height: 200px;
+}
+
+.footerBrand img {
+  height: 30px;
+  width: auto;
+}
+
+.footerTagline {
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 24px 0 0;
+}
+
+.footerIcann {
+  display: flex;
+  gap: var(--space-16);
+  align-items: center;
+  font-size: 12px;
+  line-height: 1.4;
+  max-width: 200px;
+}
+
+.footerIcannBadge {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gray-02);
+  flex-shrink: 0;
+}
+
+.footerCol {
+  flex: 0 1 193px;
+}
+
+.footerCol h3 {
+  font-size: 13px;
+  margin: 0 0 16px;
+  font-weight: 400;
+}
+
+.footerCol ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.footerCol a {
+  color: var(--color-gray-02);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.footerCol a:hover {
+  color: var(--color-white);
+}
+
+.footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding-block: var(--space-12);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.footerLocales {
+  display: flex;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.footerLocaleBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px;
+  border-radius: 100px;
+}
+
+
+
+.footerLegal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+  align-items: center;
+  font-size: 12px;
+}
+
+.footerLegal a {
+  color: var(--color-gray-02);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.footerLegal span {
+  color: var(--color-white);
+  font-size: 13px;
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navWrap {
+  position: relative;
+  background-color: var(--color-white);
+}
+
+/* Invert dark (#0E0E0E) icons to white on dark backgrounds */
+.promo .iconSlot16 {
+  width: 12px;
+  height: 12px;
+  margin-left: -8px;
+}
+
+.promo .iconSlot16 img {
+  width: 12px;
+  height: 12px;
+  filter: brightness(0) invert(1);
+}
+
+.salesBullets .iconSlot16 img {
+  filter: brightness(0) invert(1);
+}
+
+.footerLocaleBtn .iconSlot16 img {
+  filter: brightness(0) invert(1);
+}

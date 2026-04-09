@@ -1,0 +1,233 @@
+/**
+ * Frontsite typography — plain CSS port of `.text` / `.text--*`
+ * Title 4 breakpoints: docs/frontsite-title4.md (Figma Frontsite Library · Foundations, node 4185:52)
+ */
+
+.fsText {
+  color: var(--color-black);
+  font-family: var(--font-family-clarkson);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fsText--light {
+  color: var(--color-white);
+}
+
+/* Title 4 — Frontsite Library Foundations; linear clamp between anchor widths (see docs/frontsite-title4.md) */
+.fsText--title4 {
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  font-weight: 400;
+  font-size: 34px;
+}
+
+@media (min-width: 320px) and (max-width: 374px) {
+  .fsText--title4 {
+    font-size: clamp(34px, calc(34px + (100vw - 320px) * 6 / 55), 40px);
+  }
+}
+
+@media (min-width: 375px) and (max-width: 1019px) {
+  .fsText--title4 {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1020px) and (max-width: 1279px) {
+  .fsText--title4 {
+    font-size: clamp(40px, calc(40px + (100vw - 1020px) * 10 / 260), 50px);
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .fsText--title4 {
+    font-size: clamp(50px, calc(50px + (100vw - 1280px) * 6 / 160), 56px);
+    font-weight: 300;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .fsText--title4 {
+    font-size: clamp(56px, calc(56px + (100vw - 1440px) * 18 / 480), 74px);
+    font-weight: 300;
+  }
+}
+
+@media (min-width: 1920px) {
+  .fsText--title4 {
+    font-size: 74px;
+    line-height: 1.04;
+    font-weight: 300;
+  }
+}
+
+/* Subtitle 1 — section headlines (e.g. 40px at 1440) */
+.fsText--subtitle1 {
+  letter-spacing: -0.04em;
+  font-size: 22px;
+  line-height: 1em;
+  font-weight: 400;
+}
+
+@media (min-width: 375px) {
+  .fsText--subtitle1 {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1020px) {
+  .fsText--subtitle1 {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .fsText--subtitle1 {
+    font-size: 36px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .fsText--subtitle1 {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .fsText--subtitle1 {
+    font-size: 50px;
+  }
+}
+
+/* Subtitle 2 */
+.fsText--subtitle2 {
+  letter-spacing: -0.02em;
+  font-size: 20px;
+  line-height: 1em;
+  font-weight: 400;
+}
+
+@media (min-width: 744px) {
+  .fsText--subtitle2 {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1020px) {
+  .fsText--subtitle2 {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .fsText--subtitle2 {
+    font-size: 34px;
+  }
+}
+
+/* Subtitle 3 — card titles, medium labels */
+.fsText--subtitle3 {
+  letter-spacing: -0.01em;
+  font-size: 18px;
+  line-height: 1.2em;
+  font-weight: 500;
+}
+
+@media (min-width: 744px) {
+  .fsText--subtitle3 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .fsText--subtitle3 {
+    font-size: 24px;
+  }
+}
+
+/* Title 1 — display-adjacent marketing lockups */
+.fsText--title1 {
+  letter-spacing: -0.05em;
+  line-height: 0.93em;
+  font-weight: 300;
+  font-size: 48px;
+}
+
+@media (min-width: 375px) {
+  .fsText--title1 {
+    font-size: clamp(50px, 12vw, 64px);
+  }
+}
+
+@media (min-width: 744px) {
+  .fsText--title1 {
+    font-size: clamp(64px, 8vw, 90px);
+  }
+}
+
+@media (min-width: 1020px) {
+  .fsText--title1 {
+    font-size: clamp(90px, 6vw, 100px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .fsText--title1 {
+    font-size: 100px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .fsText--title1 {
+    font-size: clamp(100px, 5vw, 120px);
+  }
+}
+
+/* Body */
+.fsText--body {
+  letter-spacing: -0.001em;
+  font-size: 15px;
+  line-height: 1.4em;
+  font-weight: 400;
+}
+
+.fsText--body a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+
+/* Body medium */
+.fsText--bodyMedium {
+  letter-spacing: -0.001em;
+  line-height: 1.4em;
+  font-size: 15px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Footnote */
+.fsText--footnote {
+  font-size: 12px;
+  line-height: 1.4em;
+  font-weight: 400;
+}
+
+.fsText--footnote a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+
+/* Eyebrow — nav, labels */
+.fsText--eyebrow {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
