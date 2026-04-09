@@ -68,17 +68,19 @@ export function PrototypeToolbar({
     >
       <div className={styles.group}>
         <p className={styles.groupLabel}>Active promo</p>
-        <label className={styles.checkLabel}>
-          <input
-            type="checkbox"
-            checked={activePromo}
-            onChange={(e) => onActivePromoChange(e.target.checked)}
-          />
-          <span>On</span>
-        </label>
+        <button
+          type="button"
+          className={styles.toggle}
+          data-on={activePromo}
+          onClick={() => onActivePromoChange(!activePromo)}
+          aria-label="Toggle active promo"
+          aria-pressed={activePromo}
+        >
+          <span className={styles.toggleKnob} />
+        </button>
       </div>
 
-      <fieldset className={styles.group} aria-labelledby="proto-toolbar-cta">
+      <fieldset className={`${styles.group} ${!activePromo ? styles.groupDisabled : ""}`} disabled={!activePromo} aria-labelledby="proto-toolbar-cta">
         <p className={styles.groupLabel} id="proto-toolbar-cta">
           CTA style
         </p>
@@ -97,7 +99,7 @@ export function PrototypeToolbar({
         </div>
       </fieldset>
 
-      <fieldset className={styles.group} aria-labelledby="proto-toolbar-promo">
+      <fieldset className={`${styles.group} ${!activePromo ? styles.groupDisabled : ""}`} disabled={!activePromo} aria-labelledby="proto-toolbar-promo">
         <p className={styles.groupLabel} id="proto-toolbar-promo">
           Promo text
         </p>
@@ -116,7 +118,7 @@ export function PrototypeToolbar({
         </div>
       </fieldset>
 
-      <div className={styles.group}>
+      <fieldset className={`${styles.group} ${!activePromo ? styles.groupDisabled : ""}`} disabled={!activePromo}>
         <p className={styles.groupLabel}>UI elements</p>
         <div className={styles.row}>
           <label className={styles.checkLabel}>
@@ -128,7 +130,7 @@ export function PrototypeToolbar({
             <span>Strike</span>
           </label>
         </div>
-      </div>
+      </fieldset>
     </motion.aside>
   );
 }

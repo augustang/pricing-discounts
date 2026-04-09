@@ -138,9 +138,9 @@ export function PricingPage() {
   const [localPromoVisible, setLocalPromoVisible] = useState(true);
   const showToolbar = true;
   const [toolbarProto, setToolbarProto] = useState({
-    activePromo: false,
+    activePromo: true,
     badgeWithStrike: false,
-    ctaVariant: 1 as CtaVariant,
+    ctaVariant: 4 as CtaVariant,
     promoVariant: 4 as PromoVariant,
   });
 
